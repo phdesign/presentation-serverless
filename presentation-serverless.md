@@ -32,6 +32,12 @@ Why serverless
 * Isolated deployments
 * Pay per invocation vs. pay to have server always running
 
+Why would you not use it?
+
+* Immature
+* Cost of startup time
+* Stateless / connection pooling
+
 Lamdba needs an event source
 
 * API Gateway
@@ -80,6 +86,18 @@ https://twitter.com/VilleImmonen/status/722324840435302400
 >
 > \- Thoughtworks Tech Radar
 
+
+
+## v2
+
+Serverless architecture is all the rage in the development community at the moment, and for good reason. Serverless offers benefits for everyone from self funded startups to global corporates. In this session we're going to take a look at what serverless is, the benefits of using serverless over traditional long running applications, the serverless ecosystem including hosting providers, we'll take a bit more of a deep dive in AWS's serverless Lambdas, we're even going to try writing a lambda and deploying it to see just how easy they are to create, and then we'll close out with some discussion on the drawbacks of using serverless.
+
+So first, what is Serverless? The term serverless is often used in reference to the Serverless Framework, which is.a toolset for managing AWS serverless, I'm going to be using the term to mean the higher level concept of Serverless computing or Serverless architecture.
+
+
+
+
+
 ## v1
 
 Serverless architecture is all the rage in the development community at the moment, for developers it means is that we get to write modules or functions, zip them up and upload them to a cloud provider to run on some configured events. Serverless architecture can be described as code that is run in stateless compute containers that are event-triggered, ephemeral (may only last for one invocation), and fully managed by a 3rd party. That sounds like a bit of a mouthful so let's unpack that a bit. 
@@ -104,20 +122,17 @@ But maintaining the server images still requires ongoing time and effort. Someon
 
 Other benefits to using Serverless are that each function is independently deployable, meaning we can make small isolated changes to one part of the system and deploy them, this becomes increasingly important when you have a team of people working on different areas of the system. Rather than needing to coordinate a deployment of multiple different changes to multiple areas of the system and testing them in collaboration, we just deploy the part we need.
 
-Serverless architecture is helping the rapid delivery of microservices. These are small, isolated but compossible services that perform help enable the rapid delivery of features while improving maintainability of the system as a whole.
+Serverless architecture is helping the rapid delivery of microservices. These are small, isolated but compossible services that perform a single operation help enable the rapid delivery of features while improving maintainability of the system as a whole.
 
 
 
 AWS's Lambda functions are by far the most recognised Serverless offering, but there are other competitors in the market, including [Google Cloud Functions](https://cloud.google.com/functions/), [Microsoft Azure Functions](https://azure.microsoft.com/en-us/services/functions/), [IBM OpenWhisk](https://developer.ibm.com/openwhisk/) with an [open source implementation](https://github.com/openwhisk/openwhisk?cm_mc_uid=14550632011514612454806&cm_mc_sid_50200000=1466841331), [Iron.io](http://iron.io/), and [Webtask](https://webtask.io/).
 
-Serverless requires an event to trigger the execution and scaling of your functions, for AWS there are many events that can be configured, including API Gateway
+Serverless requires an event to trigger the execution and scaling of your functions, for AWS there are many events that can be configured, including API Gateway, which allows you to accept RESTful HTTP requests, trigger a Lambda to run then return the result. This allows us to build fully managed RESTful web services, and by abstracting the API configuration from the running code, we could maintain multiple backwards compatible versions of our API talking to the one codebase. Other event sources include CloudWatch, CodeCommit, DynamoDB, Kinesis, S3 and SNS. Using CloudWatch you can configure code that is run based on metrics or alarms from another system, or a common example is using an S3 event to trigger a function. S3 is a file storage system from AWS, so you could configure that every time an image is saved into a specific location in S3 then a Lambda is triggered that creates multiple thumbnails or resizes of the image and save them away. 
 
-S3
 
-- Kinesis
-- SNS
-- DynamoDB
-- CloudWatch and more...
+
+One of the challenges with Lambda is managing the configuration of all the interconnected systems. It's possible to create a lambda and author it through the AWS web console, then create the required API Gateway configuration to trigger the invocation of the lambda, but the configuration can get complex, especially if authentication or caching needs to be involved. This is why serverless toolsets are starting to be developed, the most well known of which is called Serverless Framework. 
 
 
 

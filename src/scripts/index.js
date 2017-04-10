@@ -1,4 +1,3 @@
-import 'font-awesome/less/font-awesome.less';
 import 'styles/style.less';
 require.context('../images', true, /\.(png|jpg|gif)$/);
 import bespoke from 'bespoke';
