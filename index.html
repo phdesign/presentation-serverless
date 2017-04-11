@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Going Serverless: Code Without Infrastructure</title>
+        <link href="http://fonts.googleapis.com/css?family=Voltaire|Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <article>
+             <section class="borderless">
+                <span class="fa-stack">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
+                </span>
+                <h1 class="vintage">Going Serverless:</h1>
+                <h3>Code Without Infrastructure</h3>
+            </section>
+            <section>
+                <ol class="align-left">
+                    <li>What is Serverless?</li>
+                    <li>Serverless benefits</li>
+                    <li>The Serverless ecosystem</li>
+                    <li>AWS Lambda</li>
+                    <li>Serverless drawbacks</li>
+                </ol>
+            </section>
+            <section data-bespoke-state="invert">
+                <span class="chapter-number"><span>1</span></span>
+                <h2>What is Serverless?</h2>
+            </section>
+            <section>
+                <h3>Disambiguation</h3>
+            </section>
+            <section class="borderless">
+                <blockquote>
+                    [Code that] is run in stateless compute containers that are event-triggered, ephemeral (may only last for one invocation), and fully managed by a 3rd party. 
+                    <span class="attribution">- ThoughtWorks</span>
+                </blockquote>
+            </section>
+            <section>
+                <h3>Stateless compute containers</h3>
+            </section>
+            <section>
+                <h3>Event triggered</h3>
+            </section>
+            <section>
+                <h3>Ephemeral</h3>
+            </section>
+            <section>
+                <h3>Fully managed<br/> by a 3rd party</h3>
+            </section>
+            <section class="borderless">
+                <blockquote>
+                    Serverless architecture is such a silly name. Of course there are servers, just not ones you need to watch and micromanage all the time
+                    <span class="attribution">- @VilleImmonen</span>
+                </blockquote>
+            </section>
+            <section data-bespoke-state="invert">
+                <span class="chapter-number"><span>2</span></span>
+                <h2>Serverless benefits</h2>
+            </section>
+            <section>
+                <h3>Time to market</h3>
+            </section>
+            <section>
+                <h3>
+                    Pet servers
+                    <div class="strikeout no-transform"><span class="lower">vs.</span></div>
+                    Cattle servers
+                </h3>
+            </section>
+            <section>
+                <h3>Focus on what you do best</h3>
+            </section>
+            <section>
+                <ul>
+                    <li class="bullet">Virtualisation (IaaS)</li>
+                    <li class="bullet">Platform as a Service (PaaS)</li>
+                    <li class="bullet">Functions as a Service (FaaS)</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Serverless Microservices</h3>
+                <h5>For the win!</h5>
+            </section>
+            <section data-bespoke-state="invert">
+                <span class="chapter-number"><span>3</span></span>
+                <h2>The Serverless ecosystem</h2>
+            </section>
+            <section>
+                <h3>Serverless Providers</h3>
+                <ul>
+                    <li>Amazon AWS Lambda</li>
+                    <li><a href="https://cloud.google.com/functions/">Google Cloud Functions</a></li>
+                    <li><a href="https://azure.microsoft.com/en-us/services/functions/">Microsoft Azure Functions</a></li>
+                    <li><a href="https://developer.ibm.com/openwhisk/">IBM OpenWhisk</a></li>
+                    <li><a href="http://iron.io/">Iron.io</a></li>
+                    <li><a href="https://webtask.io/">Webtask</a></li>
+                </ul>
+            </section>
+            <section>
+                <h3>{{Slide about Lambda events}}</h3>
+            </section>
+            <section>
+                <!-- Could use langauge logos -->
+                <h3>Lambda languages</h3>
+                <ul>
+                    <li>JavaScript (nodejs)</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                    <li>C#</li>
+                </ul>
+            </section>
+            <section class="borderless">
+                <img src="images/serverless_logo_fire.gif" alt="Serverless Framework">
+            </section>
+            <section data-bespoke-state="invert">
+                <span class="fa-stack">
+                  <i class="fa fa-square fa-stack-2x"></i>
+                  <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
+                </span>
+                <h2>Demo</h2>
+            </section>
+            <section data-bespoke-state="invert">
+                <span class="chapter-number"><span>5</span></span>
+                <h2>Serverless drawbacks</h2>
+            </section>
+            <section>
+                <h3>Startup time</h3>
+            </section>
+            <section>
+                <h3>Authentication</h3>
+            </section>
+            <section>
+                <h3>Dev / integration testing</h3>
+            </section>
+            <section>
+                <h3>Statelessness</h3>
+            </section>
+
+<!--
+            <section>
+                <h2>Origins of mob programming</h2>
+                <div class="woody profile-pic"></div>
+                <div>Woody Zuill</div>
+            </section>
+            <section>
+                <h2>The mechanics</h2>
+            </section>
+            <section data-bespoke-state="light" data-bespoke-backdrop="rally-driver fade-dark cover">
+                <h3>Driver / navigator model</h3>
+                <div class="quote">For an idea to go from your head into the computer it MUST go through someone else’s hands</div>
+            </section>
+            <section>
+                <h3>Equipment setup</h3>
+            </section>
+            <section>
+                <h3>Administrative tasks</h3>
+            </section>
+            <section data-bespoke-state="dark">
+                <h2>The benefits</h2>
+            </section>
+            <section data-bespoke-state="light" data-bespoke-backdrop="lego-teamwork fade-dark cover">
+                <h3>Team cohesion and redundancy</h3>
+            </section>
+            <section>
+                <h3>Upskilling</h3>
+            </section>
+            <section data-bespoke-state="light" data-bespoke-backdrop="jurassicworld fade-dark cover">
+                <h3>Quality control</h3>
+            </section>
+            <section data-bespoke-state="dark">
+                <h2>But...will productivity will drop?</h2>
+            </section>
+            <section data-bespoke-backdrop="a-day-of">
+            </section>
+            <section>
+                <h2>More information</h2>
+                <ul>
+                    <li><a href="http://mobprogramming.org">mobprogramming.org</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=p_pvslS4gEI">A day of Mob Programming (YouTube)</a></li>
+                    <li><a href="https://www.agilealliance.org/wp-content/uploads/2015/12/ExperienceReport.2014.Zuill_.pdf">Mob Programming - A Whole Team Approach (PDF)</a></li>
+                </ul>
+            </section>
+-->
+            <section>
+                <h2>Thanks.</h2>
+                <div class="footnote">
+                    <p><i class="fa fa-twitter"></i> <a href="https://twitter.com/pheasley">@pheasley</a></p>
+                    <p><i class="fa fa-globe"></i> <a href="http://phdesign.com.au/presentation-serverless">phdesign.com.au/presentation-serverless</a></p>
+                </div>
+            </section>
+        </article>
+
+    <script type="text/javascript" src="app.min.js"></script></body>
+</html>
