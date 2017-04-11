@@ -92,9 +92,9 @@ https://twitter.com/VilleImmonen/status/722324840435302400
 
 Serverless architecture is all the rage in the development community at the moment, and for good reason. Serverless offers benefits for everyone from self funded startups to global corporates. In this session we're going to take a look at what serverless is, the benefits of using serverless over traditional long running applications, the serverless ecosystem including hosting providers, we'll take a bit more of a deep dive in AWS's serverless Lambdas, we're even going to try writing a lambda and deploying it to see just how easy they are to create, and then we'll close out with some discussion on the drawbacks of using serverless.
 
-So first, what is Serverless? The term serverless is often used in reference to the Serverless Framework, which is.a toolset for managing AWS serverless, I'm going to be using the term to mean the higher level concept of Serverless computing or Serverless architecture.
+So first, what is Serverless? The term serverless is often used in reference to the Serverless Framework, which is a toolset for managing AWS serverless, I'm going to be using the term to mean the higher level concept of Serverless computing or Serverless architecture.
 
-
+Serverless has been described as "[Code that] is run in stateless compute containers that are event-triggered, ephemeral (may only last for one invocation), and fully managed by a 3rd party." More simply put, Serverless describes functions or modules that are run on demand.
 
 
 

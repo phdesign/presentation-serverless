@@ -4,9 +4,9 @@
   "description": "A presentation on mob programming",
   "main": "src/scripts/index.js",
   "scripts": {
-    "start": "webpack",
-    "serve": "webpack-dev-server",
-    "deploy": "npm start && gh-pages -d dist"
+    "build": "webpack",
+    "start": "webpack-dev-server --inline --hot",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "author": "Paul Heasley <paul.heasley@gmail.com>",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "html-webpack-plugin": "^2.24.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "raw-loader": "^0.5.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.3",

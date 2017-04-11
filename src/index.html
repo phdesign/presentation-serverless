@@ -8,7 +8,7 @@
     </head>
     <body>
         <article>
-             <section class="no-border">
+             <section class="borderless">
                 <span class="fa-stack">
                   <i class="fa fa-circle fa-stack-2x"></i>
                   <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
@@ -32,6 +32,12 @@
             <section>
                 <h3>Disambiguation</h3>
             </section>
+            <section class="borderless">
+                <blockquote>
+                    [Code that] is run in stateless compute containers that are event-triggered, ephemeral (may only last for one invocation), and fully managed by a 3rd party. 
+                    <span class="attribution">- ThoughtWorks</span>
+                </blockquote>
+            </section>
             <section>
                 <h3>Stateless compute containers</h3>
             </section>
@@ -43,6 +49,12 @@
             </section>
             <section>
                 <h3>Fully managed<br/> by a 3rd party</h3>
+            </section>
+            <section class="borderless">
+                <blockquote>
+                    Serverless architecture is such a silly name. Of course there are servers, just not ones you need to watch and micromanage all the time
+                    <span class="attribution">- @VilleImmonen</span>
+                </blockquote>
             </section>
             <section data-bespoke-state="invert">
                 <span class="chapter-number"><span>2</span></span>
@@ -90,7 +102,17 @@
             <section>
                 <h3>{{Slide about Lambda events}}</h3>
             </section>
-            <section class="no-border">
+            <section>
+                <!-- Could use langauge logos -->
+                <h3>Lambda languages</h3>
+                <ul>
+                    <li>JavaScript (nodejs)</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                    <li>C#</li>
+                </ul>
+            </section>
+            <section class="borderless">
                 <img src="images/serverless_logo_fire.gif" alt="Serverless Framework">
             </section>
             <section data-bespoke-state="invert">
@@ -164,8 +186,10 @@
 -->
             <section>
                 <h2>Thanks.</h2>
-                <p class=""><i class="fa fa-globe"></i> <a href="http://phdesign.com.au/presentation-mob-programming">http://phdesign.com.au/presentation-mob-programming</a></p>
-                <p class=""><i class="fa fa-twitter"></i> <a href="https://twitter.com/pheasley">@pheasley</a></p>
+                <div class="footnote">
+                    <p><i class="fa fa-twitter"></i> <a href="https://twitter.com/pheasley">@pheasley</a></p>
+                    <p><i class="fa fa-globe"></i> <a href="http://phdesign.com.au/presentation-serverless">phdesign.com.au/presentation-serverless</a></p>
+                </div>
             </section>
         </article>
 

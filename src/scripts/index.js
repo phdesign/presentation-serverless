@@ -1,3 +1,5 @@
+require('raw!../index.html'); // Dummy import to make webpack watch for html changes
+
 import 'styles/style.less';
 require.context('../images', true, /\.(png|jpg|gif)$/);
 import bespoke from 'bespoke';

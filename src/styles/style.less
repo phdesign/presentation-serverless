@@ -78,7 +78,7 @@ article {
   border: 10px solid @color_dark_grey;
   z-index: -1;
 }
-.no-border:after {
+.borderless:after {
   content: none;
 }
 .bespoke-inactive {
@@ -202,8 +202,6 @@ body {
   font-weight: 300;
   font-size: @font_size_base;
   color: @font_color;
-}
-h1, h2, h3, h4, h5, ul, ol {
   font-family: @font_family_fancy;
 }
 h1, h2, h3, h4, h5 {
@@ -250,12 +248,23 @@ li {
   margin-bottom: (@font_size_base * 0.2);
 }
 p {
-  font-family: @font_family_sans_serif;
-  margin: 0 100px (@font_size_base * 0.6);
+  margin: 0 0 (@font_size_base * 0.6);
   line-height: (@font_size_base * 1.1);
 }
 blockquote {
+  text-align: left;
   max-width: 75%;
+  border-left: 10px solid fade(@color_paper_inverse, 60%);
+  margin: 1em 0;
+  padding: 0.3em 0 0.3em 0.5em;
+
+  .attribution {
+    display: block;
+    font-size: .8em;
+    color: fade(@font_color, 50%);
+    margin-top: .4em;
+    font-style: italic;
+  }
 }
 small {
   font-size: 50%;
@@ -272,37 +281,6 @@ b {
 
 .strikethrough {
   text-decoration: line-through;
-}
-.quote {
-  font-size: (@font_size_base * 1.2);
-  font-weight: 300;
-  margin-bottom: (@font_size_base * 0.4);
-  font-style: italic;
-  .quote-marks {
-    font-size: (@font_size_base * 3);
-    // font-family: @font_family_serif;
-    color: @color_grey;
-    line-height: 0.1em;
-    vertical-align: -0.4em;
-  }
-  &:before {
-    content: "\00201C";
-    margin-right: 0.25em;
-    .quote-marks;
-  }
-  &:after {
-    content: "\00201D";
-    margin-left: 0.25em;
-    .quote-marks;
-  }
-  &.text-small {
-    &:before {
-      font-size: (@font_size_base * 1.8);
-    }
-    &:after {
-      font-size: (@font_size_base * 1.8);
-    }
-  }
 }
 .align-left {
   text-align: left;
@@ -395,15 +373,12 @@ b {
 }
 .footnote {
   position: absolute;
-  bottom: 80px;
+  bottom: 100px;
   margin: 0;
-  font-size: (@font_size_base * 0.7);
+  color: @color_paper_inverse;
 
-  &.left {
-    left: 50px;
-  }
-  &.right {
-    right: 50px;
+  a {
+    color: @color_paper_inverse;
   }
   .fa {
     margin-right: (@font_size_base * 0.25);
@@ -439,8 +414,9 @@ b {
   color: @color_paper_inverse;
 }
 .chapter-number {
-  .fa-stack;
   font-weight: bold;
+  font-family: @font_family_sans_serif;
+  .fa-stack;
 
   &:before {
     content: @fa-var-circle;
