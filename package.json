@@ -1,7 +1,7 @@
 {
-  "name": "presentation-mob-programming",
+  "name": "presentation-serverless",
   "version": "1.0.0",
-  "description": "A presentation on mob programming",
+  "description": "A presentation on serverless computing",
   "main": "src/scripts/index.js",
   "scripts": {
     "build": "webpack",
