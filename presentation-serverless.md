@@ -20,20 +20,6 @@ What we learnt
 
 https://twitter.com/VilleImmonen/status/722324840435302400
 
-> Serverless architecture is such a silly name. Of course there are servers, just not ones you need to watch and micromanage all the time
->
-> \- @VilleImmonen
-
-> [Code that] is run in stateless compute containers that are event-triggered, ephemeral (may only last for one invocation), and fully managed by a 3rd party.
->
-> \- Mike Roberts (ThoughtWorks)
-
-> A serverless architecture approach replaces long-running virtual machines with ephemeral compute power that comes into existence on request and disappears immediately after use. 
->
-> \- Thoughtworks Tech Radar
-
-
-
 ## Demo
 
 Walk through creating an S3 based lambda using the AWS console.
@@ -74,7 +60,19 @@ Other benefits to using Serverless are that each function is independently deplo
 
 Serverless computing can significantly increase a companies time to market, which can give you a big competitive advantage. Often being the first to market with a new offering means you can dominate the market, and the sooner you put your software into customers hands the sooner you can start realising profit from it. 
 
-To understand why serverless computing is such a revolution, it's useful to review how it's come about with a quick history of Cloud computing. 
+To understand why serverless computing is such a revolution, it's useful to review a short history of Cloud computing.
+
+20 years ago we ran servers on bare metal machines. If you wanted a web server, you'd buy a machine to run that, if you wanted a file server, that's another machine and if you wanted a database server, there's another machine. Companies would host these in their offices or in a database centre and pay ongoing running and operating costs. 
+
+Then came the rise of virtualisation. Instead of having to purchase a machine for each server, you could purchase a beefy machine and run multiple virtual servers on it, and they would all be securely sandboxed from each other. 
+
+Next we saw smart companies like Amazon offering to host the hardware for you, this is known as Infrastructure as a Service, you could now rent the infrastructure to run your virtual machine rather than owning it yourself, this means significant reducing of overhead costs like networking and data centres, with the added benefit of increased redundancy. Because Cloud providers are running infrastructure at scale, they can make it very affordable in comparison to running the infrastructure yourself.
+
+A few providers took this model a step further with what is known as Platform as a Service. A good example of this Microsoft Azure, you provide them with a application or site to run and they'll manage the operating system and environment for you. Heroku did this very successfully for node applications.
+
+Skipping over containerisation like Docker, this has led us to Serverless computing, also known as Functions as a Service. Functions as a Service is similar to Platform as a Service, except that with Platform as a Service you still need to worry about scaling multiple servers. You usually pay per server that is running your code and there can be a delay from when your servers start getting significant load until new instances are spun up and can handle that load. With Functions as a Service all the scaling is managed for you, you simply provide your code and your serverless provider promises to run it at constant performance regardless of whether you run it once or a thousand times.
+
+The microservice community has eagerly adopted serverless technology, microservices are an architectural pattern to decouple your application and allow different parts of the system to be changed independently. One of the major challenges with microservices is that every services needs management and monitoring of it's operations, serverless outsources the majority of this work to the Cloud provider leaving you to worry more about the code, an excellent match for developing microservices.
 
 ### 3. Serverless Ecosystem
 
@@ -86,11 +84,13 @@ All of them have very similar offerings, but we're going to focus a bit more on 
 
 AWS Lambda's can be configured to respond to any of the following events, and the list is continuously growing. API Gateway, S3, Kinesis, SNS, DynamoDB, CloudWatch and more…
 
-We'll look at a couple of use cases for these events. Firstly, using API Gateway we can build a RESTful API to respond to web requests without needing a web server. 
+We'll look at a couple of use cases for these events. Firstly, using API Gateway we can build a RESTful API to respond to web requests without needing a web server. API Gateway allows you to configure public endpoints and map each of the endpoints and HTTP verbs like GET, POST, PUT through to different AWS services, including Lambdas. A common template for RESTful serverless services in AWS is to use API Gateway to manage the incoming endpoints and authentication, Lambda for domain logic, and DynamoDB which is a NoSQL database for storage. 
 
-// TODO: Serverless use cases
+Another common example is event driven data processing. Lambdas can be configured to respond to S3 events, S3 is Amazon's file storage service, so your could for example, have a lambda that watches for any images uploaded to S3, then create different resolutions of that image and save them for serving optimised images to mobile users.
 
-// TODO: Serverless Framework
+And lastly, another common use is for stream processing. Uses Kinesis or SNS, you can have a Lambda that processes any message placed on the stream. 
+
+The Serverless Framework has become the de facto toolset for managing AWS lambdas. Using YAML configuration files it allows you to define the events that will trigger the lambda function, and it can automatically set up all the resources necessary for you. Serverless Framework takes away the pain of configuring multiple different AWS resources to all work in synchronisation, for example you can specify a URL and write the code that will execute when that URL is hit. We used Serverless Framework for our recent project, and found we were up in running amazingly quickly, I think we'd done 50% of the service within a fortnight. However as we started getting more complex with our service and using projections to optimise querying the service, we start fighting Serverless Framework a bit for some operations we resorted to using the AWS CLI directly.
 
 ### 4. Serverless challenges
 
@@ -102,29 +102,19 @@ Startup time can be a problem for some serverless functions. As there really are
 
 Authentication isn't a challenge, in fact it's pretty well supported on AWS, it's just something to be aware of. Generally your serverless functions can be blissfully unaware of authentication, it is usually handled further up the stack and the relevant information like user id passed down. For example, API Gateway can manage authentication, either to a managed service or to a lambda that does the custom authentication check, this authentication approval can then be cached for performance, we can assume that if the user passes the same token for the next 5 minutes that they are still authenticated. 
 
-Many people see a code editor in a cloud console and object to serverless functions as it circumvents all the good practices we've learnt from decades of coding, like source control, unit testing and continuous integration. But improved tooling is making it easier to bring all those good practices to serverless functions. While you can edit your serverless code directly in the browser, it's much better to manage it as a project folder on your local system where you can use your favourite source control, then use tools like Serverless Framework to manage the deployment and even local testing of the functions. For our project we managed to replicate an entire local development environment, so we could test our serverless APIs running on a local machine, we also had a fully automated test suite that ran over the code, and finally we had an automated continuous integration and delivery environment where once we committed and pushed a change to either the code or the configuration, our test suite would build on Travis and deploy immediately. For API driven serverless functions this works pretty seamlessly. The challenges increase when you're trying to locally replicate other event triggers like file stream processing.
+Many developers see a code editor in a web browser and object to serverless functions as it circumvents all the good practices we've learnt from decades of coding, like source control, unit testing and continuous integration. But improved tooling is making it easier to bring all those good practices to serverless functions. While you can edit your serverless code directly in the browser, it's much better to manage it as a project folder on your local system where you can use your favourite source control, then use tools like Serverless Framework to manage the deployment and even local testing of the functions. For our project we managed to replicate an entire local development environment, so we could test our serverless APIs running on a local machine, we also had a fully automated test suite that ran over the code, and finally we had an automated continuous integration and delivery environment where once we committed and pushed a change to either the code or the configuration, our test suite would build on Travis and deploy immediately. For API driven serverless functions this works pretty seamlessly. The challenges increase when you're trying to locally replicate other event triggers like file stream processing.
 
-Statelessness is often seen as a good thing, for a long time developers relied on things like session or application state to maintain state across multiple web requests. This would help, for example, if you had a multi page signup form. You didn't want to commit the partially complete form to the database yet because the user might cancel, but you need to remember what they entered on the previous screens. Nowadays we have richer JavaScript front ends or mobile apps that can manage collecting pages of information before sending it off to the server, so a lot of state is unnecessary, but by habit we still rely on it. Have stateless requests can be a mind shift for some, but ultimately it results in better applications that are easier to manage. 
+Statelessness is often seen as a good thing, for a long time developers relied on things like session or application state to maintain state across multiple web requests. This would help, for example, if you had a multi page signup form. You didn't want to commit the partially complete form to the database yet because the user might cancel, but you need to remember what they entered on the previous screens. Nowadays we have richer JavaScript front ends or mobile apps that can manage collecting pages of information before sending it off to the server, so a lot of state is unnecessary, but by habit we still rely on it. Having stateless requests can be a mind shift for some, but ultimately it results in better applications that are easier to manage. 
+
+// TODO: Recap / conclusion
 
 ## v1
-
-
-
-
-
-
 
 Servers that are carefully managed and continuously upgraded are known as pet servers. Pet servers require significant attention and effort to ensure they're constantly performing correctly, and if things go wrong they require a lot of effort to replace. In contrast cattle servers are servers that are spun up as needed and then destroyed, they require less maintenance and if something is going wrong with the server, you kill it and start another one. 
 
 Teams are getting leaner and organisations are understanding the value of focusing on doing what you do best and outsourcing the rest. The rise of Cloud computing has meant this is affordable for everyone. Before virtualisation and Cloud technologies, servers were carefully managed and upgraded, teams were dedicated to the correct configuration and running of the infrastructure to host applications and replacing them was costly. We call those pet servers, they take a lot of maintenance and we care for them over their long lifetime. Then virtualisation came about, companies like Amazon's AWS offered Infrastructure as a Service (IaaS) - no more physical servers to buy and manage, you just install your virtual machines on their bare metal. Rather than managing pet servers, you could define a server image then spin up an instance of that server and kill it as needed. This meant that scaling an application could become much more affordable. Rather than buying and maintaining 10 expensive machines to handle the peak load times, you could run just one virtual server then start more up as needed and shut them down when load decreases. 
 
 But maintaining the server images still requires ongoing time and effort. Someone needs to be monitoring security patches for the operating system and required stack in the image and recreating the image as necessary. Microsoft's Azure Cloud offering focuses on Platform as a Service (PaaS) to abstract away the operating system and hosting stack. You provide them with a compiled .NET application and they manage running it and scaling it. This is very similar to Serverless, except that with PaaS it's expected that your code will be constantly running like a traditional web server application. Serverless is sometimes known as Functions as a Service (FaaS). When you deploy code to a Serverless architecture it doesn't need to know whether it's a web service or any other type of application. It's just a function that you configure to run when certain events occur, and once that thread is finished your code stops executing, you now only need to pay per invocation rather than for a server to be constantly running.
-
-Serverless architecture is helping the rapid delivery of microservices. These are small, isolated but compossible services that perform a single operation help enable the rapid delivery of features while improving maintainability of the system as a whole.
-
-
-
-
 
 Serverless requires an event to trigger the execution and scaling of your functions, for AWS there are many events that can be configured, including API Gateway, which allows you to accept RESTful HTTP requests, trigger a Lambda to run then return the result. This allows us to build fully managed RESTful web services, and by abstracting the API configuration from the running code, we could maintain multiple backwards compatible versions of our API talking to the one codebase. Other event sources include CloudWatch, CodeCommit, DynamoDB, Kinesis, S3 and SNS. Using CloudWatch you can configure code that is run based on metrics or alarms from another system, or a common example is using an S3 event to trigger a function. S3 is a file storage system from AWS, so you could configure that every time an image is saved into a specific location in S3 then a Lambda is triggered that creates multiple thumbnails or resizes of the image and save them away. 
 
